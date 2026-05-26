@@ -48,7 +48,6 @@ function App() {
         description: `VIP Ticket - ${venue.name}`,
         order_id: orderData.id,
         handler: async function (response) {
-          // --- THE FINAL HANDSHAKE ---
           setMessage(`Payment Verified! 🎉 Saving your ticket to the cloud...`);
 
           try {
@@ -61,7 +60,8 @@ function App() {
               },
               body: JSON.stringify({ 
                 amount: 500, 
-                paymentId: response.razorpay_payment_id 
+                paymentId: response.razorpay_payment_id,
+                venueId: venue.id // <--- THE UPGRADE: Telling Java which venue to update!
               })
             });
 
